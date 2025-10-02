@@ -2,6 +2,7 @@ plugins {
     alias(libs.plugins.android.application)
     alias(libs.plugins.kotlin.android)
     alias(libs.plugins.kotlin.compose)
+    id("org.jetbrains.kotlin.plugin.serialization") version "2.0.20"
 }
 
 android {
@@ -56,4 +57,13 @@ dependencies {
     androidTestImplementation(libs.androidx.compose.ui.test.junit4)
     debugImplementation(libs.androidx.compose.ui.tooling)
     debugImplementation(libs.androidx.compose.ui.test.manifest)
+
+    // Pager（Compose Foundation 內建）
+    implementation("androidx.compose.foundation:foundation:1.6.8")
+
+    // 影像載入(不能高於kotlin版本)
+    implementation("io.coil-kt:coil-compose:2.6.0")
+
+    // JSON(不能高於kotlin版本)
+    implementation("org.jetbrains.kotlinx:kotlinx-serialization-json:1.6.3")
 }
