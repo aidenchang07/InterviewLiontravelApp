@@ -14,8 +14,7 @@ class AssetSaveRepository(
     private val jsonFileName: String = "data.json"
 ) : SaveRepository {
     private val json = Json {
-        ignoreUnknownKeys = true      // 忽略未知欄位
-        explicitNulls = false         // 略過 null 欄位的明確輸出需求
+        ignoreUnknownKeys = true
     }
 
     override suspend fun getCarouselImages(): List<CarouselImage> {
