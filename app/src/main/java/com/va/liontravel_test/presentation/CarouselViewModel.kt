@@ -2,10 +2,12 @@ package com.va.liontravel_test.presentation
 
 import androidx.lifecycle.ViewModel
 import androidx.lifecycle.viewModelScope
+import com.va.liontravel_test.domain.model.CarouselImage
 import com.va.liontravel_test.domain.repo.SaveRepository
 import kotlinx.coroutines.flow.MutableStateFlow
 import kotlinx.coroutines.flow.StateFlow
 import kotlinx.coroutines.flow.asStateFlow
+import kotlinx.coroutines.flow.update
 import kotlinx.coroutines.launch
 
 /**
@@ -22,14 +24,22 @@ class CarouselViewModel(
     fun load() {
         viewModelScope.launch {
             _state.value = CarouselUiState(isLoading = true)
-            runCatching { repo.getCarouselImages() }
-                .onSuccess {
-                    println("aiden is onSuccess, images:")
-                    _state.value = CarouselUiState(isLoading = false, images = it)
-                }
-                .onFailure {
-                    println("aiden is onFailure")
-                    _state.value = CarouselUiState(isLoading = false, error = it.message)
+            runCatching { repo.getHomeData() }
+                .onSuccess { current ->
+                    val keyTagNo= current.tagData.first().tagNo
+                    val images = current.draftData
+                        .filter { it.tagNo == keyTagNo }
+                        .map { CarouselImage(it.draftPic) }
+                    _state.update {
+                        it.copy(
+                            isLoading = false,
+                            images = images
+                        )
+                    }
+                }.onFailure { current ->
+                    _state.update {
+                        it.copy(error = current.message)
+                    }
                 }
         }
     }
