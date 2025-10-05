@@ -1,8 +1,12 @@
 package com.va.liontravel_test.presentation
 
 import androidx.lifecycle.ViewModel
+import androidx.lifecycle.ViewModelProvider
+import androidx.lifecycle.ViewModelProvider.AndroidViewModelFactory.Companion.APPLICATION_KEY
 import androidx.lifecycle.viewModelScope
-import com.va.liontravel_test.presentation.CarouselImage
+import androidx.lifecycle.viewmodel.initializer
+import androidx.lifecycle.viewmodel.viewModelFactory
+import com.va.liontravel_test.MyApp
 import com.va.liontravel_test.domain.repo.SaveRepository
 import kotlinx.coroutines.flow.MutableStateFlow
 import kotlinx.coroutines.flow.StateFlow
@@ -20,6 +24,15 @@ class CarouselViewModel(
     val state: StateFlow<CarouselUiState> = _state.asStateFlow()
 
     init { load() }
+
+    companion object {
+        val Factory: ViewModelProvider.Factory = viewModelFactory {
+            initializer {
+                val repo = (this[APPLICATION_KEY] as MyApp).homeRepo
+                CarouselViewModel(repo)
+            }
+        }
+    }
 
     fun load() {
         viewModelScope.launch {

@@ -36,19 +36,7 @@ import okhttp3.HttpUrl.Companion.toHttpUrl
  */
 
 @Composable
-fun CarouselScreenRoot() {
-    val context = LocalContext.current
-
-    val vm: CarouselViewModel = viewModel(
-        factory = viewModelFactory {
-            initializer {
-                CarouselViewModel(
-                    repo = AssetSaveRepository(context.applicationContext)
-                )
-            }
-        }
-    )
-
+fun CarouselScreenRoot(vm: CarouselViewModel) {
     val uiState by vm.state.collectAsStateWithLifecycle()
     CarouselScreen(state = uiState)
 }
