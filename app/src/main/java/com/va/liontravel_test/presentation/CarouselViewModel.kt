@@ -2,7 +2,7 @@ package com.va.liontravel_test.presentation
 
 import androidx.lifecycle.ViewModel
 import androidx.lifecycle.viewModelScope
-import com.va.liontravel_test.domain.model.CarouselImage
+import com.va.liontravel_test.presentation.CarouselImage
 import com.va.liontravel_test.domain.repo.SaveRepository
 import kotlinx.coroutines.flow.MutableStateFlow
 import kotlinx.coroutines.flow.StateFlow
