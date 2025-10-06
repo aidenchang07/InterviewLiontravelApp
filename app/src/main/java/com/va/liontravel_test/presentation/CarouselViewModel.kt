@@ -28,7 +28,7 @@ class CarouselViewModel(
     companion object {
         val Factory: ViewModelProvider.Factory = viewModelFactory {
             initializer {
-                val repo = (this[APPLICATION_KEY] as MyApp).homeRepo
+                val repo = (this[APPLICATION_KEY] as MyApp).container.saveRepository
                 CarouselViewModel(repo)
             }
         }
