@@ -5,6 +5,6 @@ import com.va.liontravel_test.domain.model.Home
 /**
  * Created by AidenChang on 2025/10/2
  */
-interface SaveRepository {
+interface TravelRepository {
     suspend fun getHomeData(): Home
 }

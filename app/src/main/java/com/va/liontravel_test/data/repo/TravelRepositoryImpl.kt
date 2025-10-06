@@ -4,16 +4,16 @@ import android.content.Context
 import com.va.liontravel_test.data.dto.HomeDto
 import com.va.liontravel_test.data.mapper.toDomain
 import com.va.liontravel_test.domain.model.Home
-import com.va.liontravel_test.domain.repo.SaveRepository
+import com.va.liontravel_test.domain.repo.TravelRepository
 import kotlinx.serialization.json.Json
 
 /**
  * Created by AidenChang on 2025/10/2
  */
-class AssetSaveRepository(
+class TravelRepositoryImpl(
     private val context: Context,
     private val jsonFileName: String = "data.json"
-) : SaveRepository {
+) : TravelRepository {
     private val json = Json {
         ignoreUnknownKeys = true
     }
