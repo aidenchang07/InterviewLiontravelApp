@@ -58,15 +58,12 @@ dependencies {
     debugImplementation(libs.androidx.compose.ui.tooling)
     debugImplementation(libs.androidx.compose.ui.test.manifest)
 
-    implementation("androidx.lifecycle:lifecycle-runtime-ktx:2.8.4")
-    implementation("androidx.lifecycle:lifecycle-viewmodel-compose:2.8.4")
-
     // Pager（Compose Foundation 內建）
     implementation("androidx.compose.foundation:foundation:1.6.8")
 
-    // 影像載入
+    // 影像載入(不能高於kotlin版本)
     implementation("io.coil-kt:coil-compose:2.6.0")
 
-    // JSON
+    // JSON(不能高於kotlin版本)
     implementation("org.jetbrains.kotlinx:kotlinx-serialization-json:1.6.3")
 }
