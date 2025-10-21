@@ -41,61 +41,54 @@ fun CarouselScreen(
     state: CarouselUiState,
     modifier: Modifier = Modifier
 ) {
-
-    when {
-        state.isLoading -> {
-            Box(modifier.fillMaxSize(), contentAlignment = Alignment.Center) {
+    Box(
+        modifier.fillMaxSize(),
+        contentAlignment = Alignment.Center
+    ) {
+        when {
+            state.isLoading -> {
                 CircularProgressIndicator()
             }
-        }
-        state.error != null -> {
-            Box(modifier.fillMaxSize(), contentAlignment = Alignment.Center) {
+            state.error != null -> {
                 Text(text = "Error: ${state.error}")
             }
-        }
-        state.images.isEmpty() -> {
-            Box(modifier.fillMaxSize(), contentAlignment = Alignment.Center) {
+            state.images.isNullOrEmpty() -> {
                 Text("No images")
             }
-        }
-        else -> {
-            // 真實資料數量
-            val realCount = state.images.size
+            else -> {
+                // 真實資料數量
+                val realCount = state.images.size
 
-            // 虛擬無限長度
-            val infiniteCount = Int.MAX_VALUE
+                // 虛擬無限長度
+                val infiniteCount = Int.MAX_VALUE
 
-            // 從中間開始，避免一開始就靠近邊界
-            val startPage = remember(realCount) {
-                val mid = infiniteCount / 2
-                mid - (mid % realCount) // 對齊到 realCount 的倍數
-            }
+                // 從中間開始，避免一開始就靠近邊界
+                val startPage = remember(realCount) {
+                    val mid = infiniteCount / 2
+                    mid - (mid % realCount) // 對齊到 realCount 的倍數
+                }
 
-            val pagerState = rememberPagerState(
-                initialPage = startPage,
-                pageCount = { infiniteCount }
-            )
+                val pagerState = rememberPagerState(
+                    initialPage = startPage,
+                    pageCount = { infiniteCount }
+                )
 
-            // 是否正在手動拖曳
-            val isDragged by pagerState.interactionSource.collectIsDraggedAsState()
-            val pressSource = remember { MutableInteractionSource() }
-            // 是否正在點擊不動
-            val isPressed by pressSource.collectIsPressedAsState()
+                // 是否正在手動拖曳
+                val isDragged by pagerState.interactionSource.collectIsDraggedAsState()
+                val pressSource = remember { MutableInteractionSource() }
+                // 是否正在點擊不動
+                val isPressed by pressSource.collectIsPressedAsState()
 
-            // 自動輪播（只有沒手勢時才啟動）
-            if (!isDragged && !isPressed) {
-                LaunchedEffect(realCount) {
-                    while (true) {
-                        delay(3000)
-                        pagerState.animateScrollToPage(pagerState.currentPage + 1)
+                // 自動輪播（只有沒手勢時才啟動）
+                if (!isDragged && !isPressed) {
+                    LaunchedEffect(realCount) {
+                        while (true) {
+                            delay(3000)
+                            pagerState.animateScrollToPage(pagerState.currentPage + 1)
+                        }
                     }
                 }
-            }
 
-            Box(
-                modifier.fillMaxSize(),
-                contentAlignment = Alignment.Center
-            ) {
                 HorizontalPager(
                     state = pagerState,
                     modifier = Modifier
@@ -125,8 +118,6 @@ fun CarouselScreen(
 @Composable
 fun CarouselScreenPreview() {
     CarouselScreen(
-        state = CarouselUiState(
-            images = emptyList()
-        )
+        state = CarouselUiState()
     )
 }

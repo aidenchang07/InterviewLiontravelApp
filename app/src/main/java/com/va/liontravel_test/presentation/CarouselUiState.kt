@@ -5,6 +5,6 @@ package com.va.liontravel_test.presentation
  */
 data class CarouselUiState(
     val isLoading: Boolean = true,
-    val images: List<String>,
+    val images: List<String>? = null,
     val error: String? = null
 )
