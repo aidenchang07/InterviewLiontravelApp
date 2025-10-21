@@ -2,15 +2,12 @@ package com.va.liontravel_test.presentation
 
 import androidx.compose.foundation.ExperimentalFoundationApi
 import androidx.compose.foundation.clickable
-import androidx.compose.foundation.combinedClickable
 import androidx.compose.foundation.interaction.MutableInteractionSource
 import androidx.compose.foundation.interaction.collectIsDraggedAsState
 import androidx.compose.foundation.interaction.collectIsPressedAsState
 import androidx.compose.foundation.layout.Box
 import androidx.compose.foundation.layout.fillMaxSize
 import androidx.compose.foundation.layout.fillMaxWidth
-import androidx.compose.foundation.layout.height
-import androidx.compose.foundation.layout.heightIn
 import androidx.compose.foundation.pager.HorizontalPager
 import androidx.compose.foundation.pager.rememberPagerState
 import androidx.compose.material3.CircularProgressIndicator
@@ -18,20 +15,15 @@ import androidx.compose.material3.Text
 import androidx.compose.runtime.Composable
 import androidx.compose.runtime.LaunchedEffect
 import androidx.compose.runtime.getValue
-import androidx.compose.runtime.mutableIntStateOf
 import androidx.compose.runtime.remember
-import androidx.compose.runtime.setValue
 import androidx.compose.ui.Alignment
 import androidx.compose.ui.Modifier
-import androidx.compose.ui.layout.ContentScale
 import androidx.compose.ui.platform.LocalContext
 import androidx.compose.ui.tooling.preview.Preview
-import androidx.compose.ui.unit.dp
 import androidx.lifecycle.compose.collectAsStateWithLifecycle
 import coil.compose.AsyncImage
 import coil.request.ImageRequest
 import kotlinx.coroutines.delay
-import okhttp3.HttpUrl.Companion.toHttpUrl
 
 /**
  * Created by AidenChang on 2025/10/2
@@ -117,7 +109,7 @@ fun CarouselScreen(
                     val index = virtualPage % realCount
                     AsyncImage(
                         model = ImageRequest.Builder(LocalContext.current)
-                            .data(state.images[index].url)
+                            .data(state.images[index])
                             .crossfade(true)
                             .build(),
                         contentDescription = null,
@@ -134,7 +126,7 @@ fun CarouselScreen(
 fun CarouselScreenPreview() {
     CarouselScreen(
         state = CarouselUiState(
-            isLoading = true
+            images = emptyList()
         )
     )
 }

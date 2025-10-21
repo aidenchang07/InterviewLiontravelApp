@@ -42,7 +42,7 @@ class CarouselViewModel(
                     val keyTagNo= current.tagData.first().tagNo
                     val images = current.draftData
                         .filter { it.tagNo == keyTagNo }
-                        .map { CarouselImage(it.draftPic) }
+                        .map { it.draftPic }
                     _state.update {
                         it.copy(
                             isLoading = false,

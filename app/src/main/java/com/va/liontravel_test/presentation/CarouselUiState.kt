@@ -1,12 +1,10 @@
 package com.va.liontravel_test.presentation
 
-import com.va.liontravel_test.presentation.CarouselImage
-
 /**
  * Created by AidenChang on 2025/10/2
  */
 data class CarouselUiState(
     val isLoading: Boolean = true,
-    val images: List<CarouselImage> = emptyList(),
+    val images: List<String>,
     val error: String? = null
 )
