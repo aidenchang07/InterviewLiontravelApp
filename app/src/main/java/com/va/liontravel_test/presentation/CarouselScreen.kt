@@ -91,11 +91,11 @@ fun CarouselScreen(
 
             // 自動輪播（只有沒手勢時才啟動）
             if (!isDragged && !isPressed) {
-                var tick by remember { mutableIntStateOf(0) }
-                LaunchedEffect(tick, realCount) {
-                    delay(3000)
-                    pagerState.animateScrollToPage(pagerState.currentPage + 1)
-                    tick++ // 觸發下一輪
+                LaunchedEffect(realCount) {
+                    while (true) {
+                        delay(3000)
+                        pagerState.animateScrollToPage(pagerState.currentPage + 1)
+                    }
                 }
             }
 
