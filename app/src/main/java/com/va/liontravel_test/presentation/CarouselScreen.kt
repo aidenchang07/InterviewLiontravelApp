@@ -1,6 +1,7 @@
 package com.va.liontravel_test.presentation
 
 import androidx.compose.foundation.ExperimentalFoundationApi
+import androidx.compose.foundation.clickable
 import androidx.compose.foundation.combinedClickable
 import androidx.compose.foundation.interaction.MutableInteractionSource
 import androidx.compose.foundation.interaction.collectIsDraggedAsState
@@ -107,7 +108,7 @@ fun CarouselScreen(
                     state = pagerState,
                     modifier = Modifier
                         .fillMaxWidth()
-                        .combinedClickable(
+                        .clickable(
                             interactionSource = pressSource,
                             indication = null, // 不需要水波紋可設 null
                             onClick = {}
