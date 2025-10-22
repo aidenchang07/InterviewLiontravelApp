@@ -66,4 +66,7 @@ dependencies {
 
     // JSON(不能高於kotlin版本)
     implementation("org.jetbrains.kotlinx:kotlinx-serialization-json:1.6.3")
+
+    // Koin DI
+    implementation("io.insert-koin:koin-android:4.1.0")
 }

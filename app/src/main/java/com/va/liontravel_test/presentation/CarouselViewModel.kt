@@ -25,15 +25,6 @@ class CarouselViewModel(
 
     init { load() }
 
-    companion object {
-        val Factory: ViewModelProvider.Factory = viewModelFactory {
-            initializer {
-                val repo = (this[APPLICATION_KEY] as MyApp).container.travelRepository
-                CarouselViewModel(repo)
-            }
-        }
-    }
-
     fun load() {
         viewModelScope.launch {
             _state.value = CarouselUiState(isLoading = true)
