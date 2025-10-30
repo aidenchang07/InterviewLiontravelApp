@@ -25,15 +25,6 @@ class TravelViewModel(
 
     init { load() }
 
-    companion object Companion {
-        val Factory: ViewModelProvider.Factory = viewModelFactory {
-            initializer {
-                val repo = (this[APPLICATION_KEY] as MyApp).container.travelRepository
-                TravelViewModel(repo)
-            }
-        }
-    }
-
     fun load() {
         viewModelScope.launch {
             _state.value = TravelUiState(isLoading = true)
